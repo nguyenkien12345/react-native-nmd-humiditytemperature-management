@@ -1,16 +1,16 @@
+import Accordion from '@/components/Accordion'
+import Add from '@/components/Add'
+import BottomSheetInfo from '@/components/BottomSheetInfo'
+import Home from '@/components/Home'
+import InfoUser from '@/components/InfoUser'
+import List from '@/components/List'
+import TabViews from '@/components/TabViews'
+import Update from '@/components/Update'
+import Welcome from '@/components/Welcome'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 import { enableScreens } from 'react-native-screens'
-import Add from './Add'
-import BottomSheetInfo from './BottomSheetInfo'
-import Home from './Home'
-import InfoUser from './InfoUser'
-import List from './List'
-import TabViews from './TabViews'
-import Update from './Update'
-import Welcome from './Welcome'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,7 +24,7 @@ function RootComponent() {
     // <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Welcome'
+        initialRouteName='Accordion'
         screenOptions={{
           headerShown: false,
 
@@ -49,7 +49,6 @@ function RootComponent() {
         <Stack.Screen
           name='Home'
           component={Home}
-          // truyền các tham số mặc định khi màn hình được mount
           initialParams={{
             name: 'Home',
             author: 'Nguyen Trung Kien'
@@ -61,6 +60,7 @@ function RootComponent() {
         <Stack.Screen name='InfoUser' component={InfoUser} />
         <Stack.Screen name='BottomSheetInfo' component={gestureHandlerRootHOC(BottomSheetInfo)} />
         <Stack.Screen name='TabViews' component={TabViews} />
+        <Stack.Screen name='Accordion' component={Accordion} />
       </Stack.Navigator>
     </NavigationContainer>
     // </GestureHandlerRootView>
