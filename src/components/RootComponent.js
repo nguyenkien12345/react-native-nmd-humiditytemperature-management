@@ -21,7 +21,6 @@ function RootComponent() {
   // screenOptions: Cấu hình chung cho tất cả màn hình
 
   return (
-    // <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName='Accordion'
@@ -63,25 +62,7 @@ function RootComponent() {
         <Stack.Screen name='Accordion' component={Accordion} />
       </Stack.Navigator>
     </NavigationContainer>
-    // </GestureHandlerRootView>
   )
 }
 
 export default RootComponent
-
-// Lý thuyết
-
-// + Gesture (cử chỉ) là các tương tác của người dùng với màn hình như:
-// - Vuốt (Swipe)
-// - Chạm (Tap)
-// - Kéo thả (Pan/Drag)
-// - Pinch (Thu phóng bằng 2 ngón tay)
-// - Long press (Nhấn giữ)
-// - Rotation (Xoay)
-
-// + gestureHandlerRootHOC
-//  + Nếu không có gestureHandlerRootHOC:
-//    - Gesture có thể bị xung đột với gesture của navigation
-//    - Hiệu suất xử lý gesture có thể không tối ưu
-//    - Có thể gặp vấn đề với nested gesture (gesture lồng nhau)
-//    - Không có quản lý độ ưu tiên gesture

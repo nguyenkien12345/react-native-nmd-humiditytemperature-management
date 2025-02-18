@@ -25,3 +25,21 @@
 
 > - View: Nó không tự động xử lý các vùng an toàn trên màn hình, nghĩa là nếu bạn sử dụng View để hiển thị nội dung, nội dung đó có thể bị che khuất bởi notch, thanh điều hướng (navigation bar), hoặc các phần khác của giao diện người dùng.
 > - SafeAreaView: Nó tự động điều chỉnh để tránh các vùng như notch, thanh điều hướng, hoặc các phần khác của giao diện người dùng có thể che khuất nội dung.
+
+# Gesture và gestureHandlerRootHOC
+
+> - Gesture (cử chỉ) là các tương tác của người dùng với màn hình như:
+
+- Vuốt (Swipe)
+- Chạm (Tap)
+- Kéo thả (Pan/Drag)
+- Pinch (Thu phóng bằng 2 ngón tay)
+- Long press (Nhấn giữ)
+- Rotation (Xoay)
+
+> - gestureHandlerRootHOC: Nếu không có gestureHandlerRootHOC:
+
+- Gesture có thể bị xung đột với gesture của navigation
+- Hiệu suất xử lý gesture có thể không tối ưu
+- Có thể gặp vấn đề với nested gesture (gesture lồng nhau)
+- Không có quản lý độ ưu tiên gesture
