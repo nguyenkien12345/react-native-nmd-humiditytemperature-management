@@ -8,21 +8,20 @@
 - rm -rf node_modules package-lock.json
 - npm install --legacy-peer-deps
 - npx expo install expo@latest
-- npx expo start -c 
-
-- rm -rf .expo 
-- rm -rf node_modules 
-- rm -rf $TMPDIR/metro-*
+- npx expo start -c
 
 - watchman watch-del-all
 
-- npm cache clean --force
+- npm cache clean
 - yarn cache clean
 
-- npx expo start --clear --tunnel
-
 "splash": {
-    "image": "./assets/splash.png",
-    "resizeMode": "contain",
-    "backgroundColor": "#ffffff"
+"image": "./assets/splash.png",
+"resizeMode": "contain",
+"backgroundColor": "#ffffff"
 },
+
+# Sự khác biệt giữa View và SafeAreaView
+
+> - View: Nó không tự động xử lý các vùng an toàn trên màn hình, nghĩa là nếu bạn sử dụng View để hiển thị nội dung, nội dung đó có thể bị che khuất bởi notch, thanh điều hướng (navigation bar), hoặc các phần khác của giao diện người dùng.
+> - SafeAreaView: Nó tự động điều chỉnh để tránh các vùng như notch, thanh điều hướng, hoặc các phần khác của giao diện người dùng có thể che khuất nội dung.

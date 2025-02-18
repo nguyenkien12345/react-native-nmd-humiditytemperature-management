@@ -1,95 +1,67 @@
-import { StatusBar } from "expo-status-bar";
-import React, {
-  createRef,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import {
-  Animated,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import React, { createRef, forwardRef, useCallback, useEffect, useRef, useState } from 'react'
+import { Animated, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const images = {
-  man: "https://images.pexels.com/photos/3147528/pexels-photo-3147528.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-  women:
-    "https://images.pexels.com/photos/2552130/pexels-photo-2552130.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-  kids: "https://images.pexels.com/photos/5080167/pexels-photo-5080167.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+  man: 'https://images.pexels.com/photos/3147528/pexels-photo-3147528.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+  women: 'https://images.pexels.com/photos/2552130/pexels-photo-2552130.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+  kids: 'https://images.pexels.com/photos/5080167/pexels-photo-5080167.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
   skullcandy:
-    "https://images.pexels.com/photos/5602879/pexels-photo-5602879.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-  help: "https://images.pexels.com/photos/2552130/pexels-photo-2552130.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-};
+    'https://images.pexels.com/photos/5602879/pexels-photo-5602879.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+  help: 'https://images.pexels.com/photos/2552130/pexels-photo-2552130.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+}
 
 const data = Object.keys(images).map((i) => ({
   key: i,
   title: i,
   image: images[i],
-  ref: createRef(),
-}));
+  ref: createRef()
+}))
 
-const WIDTH_OF_SCREEN = Dimensions.get("window").width;
-const HEIGHT_OF_SCREEN = Dimensions.get("window").height;
+const WIDTH_OF_SCREEN = Dimensions.get('window').width
+const HEIGHT_OF_SCREEN = Dimensions.get('window').height
 
 const TabList = ({ tabs, scrollX, onItemPress }) => {
   if (tabs && tabs.length > 0) {
-    const [measures, setMeasures] = useState([]);
+    const [measures, setMeasures] = useState([])
 
-    const containerRef = useRef();
+    const containerRef = useRef()
 
     // Đo lường vị trí và kích thước của từng tab so với containerRef (tham chiếu đến View chứa các tab).
     useEffect(() => {
-      const m = [];
+      const m = []
 
       tabs.forEach((item) => {
         // item.ref.current.measureLayout được sử dụng để đo lường vị trí và kích thước của tab hiện tại so với containerRef.
-        item.ref.current.measureLayout(
-          containerRef.current,
-          (x, y, width, height) => {
-            m.push({
-              x,
-              y,
-              width,
-              height,
-            });
+        item.ref.current.measureLayout(containerRef.current, (x, y, width, height) => {
+          m.push({
+            x,
+            y,
+            width,
+            height
+          })
 
-            // Khi tất cả các tab đã được đo lường => Do something
-            if (m.length === tabs.length) {
-              setMeasures(m);
-            }
+          // Khi tất cả các tab đã được đo lường => Do something
+          if (m.length === tabs.length) {
+            setMeasures(m)
           }
-        );
-      });
-    }, []);
+        })
+      })
+    }, [])
 
     return (
-      <View style={{ position: "absolute", top: 100, width: WIDTH_OF_SCREEN }}>
+      <View style={{ position: 'absolute', top: 100, width: WIDTH_OF_SCREEN }}>
         <View ref={containerRef} style={styles.tabList}>
           {tabs.map((tab, index) => {
-            return (
-              <TabItem
-                key={tab.key}
-                tab={tab}
-                ref={tab.ref}
-                onItemPress={() => onItemPress(index)}
-              />
-            );
+            return <TabItem key={tab.key} tab={tab} ref={tab.ref} onItemPress={() => onItemPress(index)} />
           })}
         </View>
 
-        {measures.length > 0 && (
-          <Indicator measures={measures} scrollX={scrollX} />
-        )}
+        {measures.length > 0 && <Indicator measures={measures} scrollX={scrollX} />}
       </View>
-    );
+    )
   }
-};
+}
 
 const TabItem = forwardRef(({ tab, onItemPress }, ref) => {
   if (tab) {
@@ -99,65 +71,65 @@ const TabItem = forwardRef(({ tab, onItemPress }, ref) => {
           <Text
             style={{
               fontSize: 84 / data.length,
-              fontWeight: "800",
-              color: "white",
-              textTransform: "uppercase",
+              fontWeight: '800',
+              color: 'white',
+              textTransform: 'uppercase'
             }}
           >
             {tab?.title}
           </Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   }
-});
+})
 
 const Indicator = ({ measures, scrollX }) => {
   // Mảng chứa các giá trị đại diện cho vị trí cuộn của FlatList. Mỗi phần tử trong mảng tương ứng với vị trí cuộn của một tab.
-  const inputRange = data.map((_, i) => i * WIDTH_OF_SCREEN);
+  const inputRange = data.map((_, i) => i * WIDTH_OF_SCREEN)
 
   // Là chiều rộng của thanh chỉ báo, được tính toán dựa trên vị trí cuộn hiện tại (scrollX).
   // Nó sử dụng interpolate để ánh xạ giá trị cuộn (scrollX) vào chiều rộng tương ứng của từng tab.
   const indicatorWidth = scrollX.interpolate({
     inputRange,
-    outputRange: measures.map((measure) => measure.width),
-  });
+    outputRange: measures.map((measure) => measure.width)
+  })
 
   // Là vị trí ngang của thanh chỉ báo, được tính toán dựa trên vị trí cuộn hiện tại (scrollX).
   // Nó sử dụng interpolate để ánh xạ giá trị cuộn (scrollX) vào vị trí ngang tương ứng của từng tab.
   const translateX = scrollX.interpolate({
     inputRange,
-    outputRange: measures.map((measure) => measure.x),
-  });
+    outputRange: measures.map((measure) => measure.x)
+  })
 
   return (
     <Animated.View
       style={{
-        position: "absolute",
+        position: 'absolute',
         height: 4,
         width: indicatorWidth,
         left: 0,
         bottom: -10,
         transform: [{ translateX: translateX }],
-        backgroundColor: "white",
+        backgroundColor: 'white'
       }}
     />
-  );
-};
+  )
+}
 
 function TabViews() {
-  const ref = useRef();
+  const ref = useRef()
 
-  const scrollX = useRef(new Animated.Value(0)).current;
+  const scrollX = useRef(new Animated.Value(0)).current
 
   // itemIndex là chỉ số của tab được nhấn (ví dụ: 0, 1, 2, ...).
   // scrollToOffset là một phương thức của FlatList giúp cuộn danh sách đến một vị trí cụ thể dựa trên offset.
   // Nếu người dùng nhấn vào tab thứ 2 (itemIndex = 1), offset sẽ là 1 * WIDTH_OF_SCREEN, và FlatList sẽ cuộn đến vị trí của tab thứ 2.
   const onItemPress = useCallback((itemIndex) => {
     ref?.current?.scrollToOffset({
-      offset: itemIndex * WIDTH_OF_SCREEN,
-    });
-  }, []);
+      offset: itemIndex * WIDTH_OF_SCREEN
+    })
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -184,46 +156,43 @@ function TabViews() {
         renderItem={({ item }) => {
           return (
             <View style={{ width: WIDTH_OF_SCREEN, height: HEIGHT_OF_SCREEN }}>
-              <Image
-                source={{ uri: item.image }}
-                style={{ flex: 1, resizeMode: "cover" }}
-              />
+              <Image source={{ uri: item.image }} style={{ flex: 1, resizeMode: 'cover' }} />
 
               <View
                 style={[
                   StyleSheet.absoluteFillObject,
                   {
-                    backgroundColor: "rgba(0,0,0,0.3)",
-                  },
+                    backgroundColor: 'rgba(0,0,0,0.3)'
+                  }
                 ]}
               ></View>
             </View>
-          );
+          )
         }}
       />
 
       <TabList tabs={data} scrollX={scrollX} onItemPress={onItemPress} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   tabList: {
     flex: 1,
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  },
-});
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  }
+})
 
-export default TabViews;
+export default TabViews
 
 // Các thuộc tính khác của Animated.FlatList
 // - ListEmptyComponent={() => <Text>Data rỗng</Text>} // Component hiển thị khi danh sách trống (data rỗng)

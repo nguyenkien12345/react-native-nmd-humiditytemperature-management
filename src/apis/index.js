@@ -1,4 +1,4 @@
-const { baseURL, crudAPI, crud, commonHeadersAPI } = require("../constants");
+import { baseURL, crudAPI, crud, commonHeadersAPI } from "@/constants"
 
 const getAll = async () => {
     try {

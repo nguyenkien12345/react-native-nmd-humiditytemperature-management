@@ -19,4 +19,4 @@ const commonHeadersAPI = {
     'Content-type': 'application/json; charset=UTF-8'
 };
 
-module.exports = { baseURL, crudAPI, crud, commonHeadersAPI };
+exports = { baseURL, crudAPI, crud, commonHeadersAPI };
