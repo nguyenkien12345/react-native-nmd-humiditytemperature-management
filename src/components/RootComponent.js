@@ -45,14 +45,7 @@ function RootComponent() {
         }}
       >
         <Stack.Screen name='Welcome' component={Welcome} />
-        <Stack.Screen
-          name='Home'
-          component={Home}
-          initialParams={{
-            name: 'Home',
-            author: 'Nguyen Trung Kien'
-          }}
-        />
+        <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='List' component={gestureHandlerRootHOC(List)} />
         <Stack.Screen name='Add' component={Add} />
         <Stack.Screen name='Update' component={Update} />
