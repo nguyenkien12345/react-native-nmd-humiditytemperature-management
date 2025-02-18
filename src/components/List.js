@@ -47,7 +47,7 @@ function List() {
 
     const getListData = async () => {
         const data = await getAll();
-        setListData(data.data.data);
+        setListData(data?.data?.data ?? []);
         listData ? setShowLoading(false) : setShowLoading(true);
     };
 

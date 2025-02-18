@@ -1,8 +1,11 @@
-import RootComponent from './src/components/RootComponent';
+import React from "react";
+import RootComponent from "./src/components/RootComponent";
 
 function App() {
   return (
-    <RootComponent />
+    <React.StrictMode>
+      <RootComponent />
+    </React.StrictMode>
   );
 }
 
