@@ -43,3 +43,59 @@
 - Hiệu suất xử lý gesture có thể không tối ưu
 - Có thể gặp vấn đề với nested gesture (gesture lồng nhau)
 - Không có quản lý độ ưu tiên gesture
+
+# Giải thích chi tiết về file app.json
+
+{
+"expo": {
+// Tên ứng dụng hiển thị trên thiết bị
+"name": "ManagementApplication",
+
+    // ID duy nhất của ứng dụng trên Expo, dùng cho URL public
+    "slug": "ManagementApplication",
+
+    // Phiên bản ứng dụng
+    "version": "1.0.0",
+
+    // Định hướng màn hình: "portrait" (dọc) hoặc "landscape" (ngang)
+    "orientation": "portrait",
+
+    // Icon ứng dụng
+    "icon": "./assets/icon.png",
+
+    // Giao diện mặc định: "light" hoặc "dark" hoặc "automatic"
+    "userInterfaceStyle": "light",
+
+    // Pattern cho việc đóng gói assets
+    "assetBundlePatterns": ["**/*"],
+
+    // Cấu hình cho iOS
+    "ios": {
+      "supportsTablet": true  // Hỗ trợ iPad
+    },
+
+    // Cấu hình cho Android
+    "android": {
+      "softwareKeyboardLayoutMode": "pan" // Cách xử lý bàn phím
+    },
+
+    // Cấu hình cho Web
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+
+    // Các plugins Expo được sử dụng
+    "plugins": ["expo-font"]
+
+    // Mô tả ứng dụng
+    "description": "Mô tả app của bạn",
+
+    // Cấu hình màn hình khởi động (splash screen)
+    "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+    }
+
+}
+}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "thcntt3",
-    "slug": "thcntt3",
+    "name": "ManagementApplication",
+    "slug": "ManagementApplication",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

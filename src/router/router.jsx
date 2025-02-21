@@ -3,7 +3,7 @@ import AuthNavigation from '@/navigation/auth-navigation'
 import ProtectedNavigation from '@/navigation/protected-navigation'
 import { NavigationContainer } from '@react-navigation/native'
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Router = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)

@@ -1,45 +1,60 @@
+import ButtonComponent from '@/components/common/ButtonComponent'
+import ContainerComponent from '@/components/common/ContainerComponent'
+import InputComponent from '@/components/common/InputComponent'
+import SectionComponent from '@/components/common/SectionComponent'
+import { colors } from '@/constants/colors'
 import { auth } from '@/firebase/config'
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react'
-import { Button, TextInput, View } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleReset = () => {
-    setEmail('')
-    setPassword('')
-  }
-
   const handleLogin = async () => {
-    console.log({
-      email,
-      password
-    })
-
     await signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         console.log('Login Success: ', user)
       })
       .catch((error) => {
-        console.log('Login Fail: ', error)
+        console.log('Login Failure: ', error)
       })
   }
 
   return (
-    <View style={{ flex: 1, marginTop: 100 }}>
-      <TextInput value={email} onChange={(event) => setEmail(event.nativeEvent.text)} placeholder='Enter Email' />
+    <ContainerComponent>
+      <SectionComponent
+        styles={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 100
+        }}
+      >
+        <InputComponent
+          affix={<Icon name='user' size={20} color={colors.mediumGray} />}
+          value={email}
+          onChange={(val) => setEmail(val)}
+          placeholder='email'
+          label='Email'
+          clear
+          keyboardType='email-address'
+          helpText='Something went wrong'
+        />
 
-      <TextInput
-        value={password}
-        onChange={(event) => setPassword(event.nativeEvent.text)}
-        placeholder='Enter Password'
-        secureTextEntry={true} // Ẩn văn bản nhập vào
-      />
+        <InputComponent
+          affix={<Icon name='check' size={20} color={colors.mediumGray} />}
+          value={password}
+          onChange={(val) => setPassword(val)}
+          placeholder='password'
+          label='Password'
+          isPassword
+          helpText='Something went wrong'
+        />
 
-      <Button title='Login' onPress={handleLogin} />
-    </View>
+        <ButtonComponent text='Login' onPress={handleLogin} styles={{ width: '100%' }} />
+      </SectionComponent>
+    </ContainerComponent>
   )
 }
 
