@@ -6,23 +6,28 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 
 const Router = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  // const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  useEffect(() => {
-    // onAuthStateChanged: theo dõi trạng thái xác thực của người dùng. Nó sẽ tự động gọi lại (callback) mỗi khi trạng thái
-    // xác thực thay đổi, chẳng hạn như khi người dùng đăng nhập, đăng xuất, hoặc khi token xác thực được làm mới.
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true)
-      } else {
-        setIsAuthenticated(false)
-      }
-    })
+  // useEffect(() => {
+  // onAuthStateChanged: theo dõi trạng thái xác thực của người dùng. Nó sẽ tự động gọi lại (callback) mỗi khi trạng thái
+  // xác thực thay đổi, chẳng hạn như khi người dùng đăng nhập, đăng xuất, hoặc khi token xác thực được làm mới.
+  // const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setIsAuthenticated(true)
+  //   } else {
+  //     setIsAuthenticated(false)
+  //   }
+  // })
 
-    return () => unsubscribe();
-  }, [])
+  // return () => unsubscribe();
+  // }, [])
 
-  return <NavigationContainer>{isAuthenticated ? <ProtectedNavigation /> : <AuthNavigation />}</NavigationContainer>
+  // return <NavigationContainer>{isAuthenticated ? <ProtectedNavigation /> : <AuthNavigation />}</NavigationContainer>
+  return (
+    <NavigationContainer>
+      <AuthNavigation />
+    </NavigationContainer>
+  )
 }
 
 export default Router

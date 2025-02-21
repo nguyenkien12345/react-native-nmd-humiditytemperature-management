@@ -1,12 +1,13 @@
 // Import the functions you need from the SDKs you need
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { getReactNativePersistence, initializeAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyDpmfxFPTl25a--cgYxdA-R2dCXMbgIRpE',
   authDomain: 'mobile-authentication-89726.firebaseapp.com',
   projectId: 'mobile-authentication-89726',
@@ -18,7 +19,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
-const auth = getAuth()
+// Thiết lập hệ thống xác thực của Firebase (Firebase Authentication).
+// getReactNativePersistence cho phép sử dụng AsyncStorage như một phương thức lưu trữ cho xác thực.
+// Duy trì trạng thái đăng nhập của người dùng giữa các phiên làm việc.
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+})
+
 const database = getFirestore()
 
 export { auth, database }

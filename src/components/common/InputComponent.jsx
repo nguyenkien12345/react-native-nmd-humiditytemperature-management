@@ -19,7 +19,8 @@ const InputComponent = (props) => {
     clear = false,
     isPassword = false,
     keyboardType,
-    helpText = ''
+    helpText = '',
+    ...rest
   } = props
 
   if (!value && !onChange) {
@@ -63,6 +64,9 @@ const InputComponent = (props) => {
             },
             inputStyle
           ]}
+          selectionColor={'#81ecec'} // Màu sắc của con trỏ và vùng chọn.
+          // caretHidden={true} // Ẩn con trỏ nhập liệu.
+          {...rest}
         />
 
         {/* Hiển thị Icon Clear */}

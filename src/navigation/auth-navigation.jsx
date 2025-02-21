@@ -1,5 +1,6 @@
-import Login from '@/components/auth/Login'
-import Register from '@/components/auth/Register'
+import LoginWithEmail from '@/components/auth/LoginWithEmail'
+import LoginWithPhone from '@/components/auth/LoginWithPhone'
+import RegisterWithEmail from '@/components/auth/RegisterWithEmail'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator()
@@ -7,7 +8,7 @@ const Stack = createNativeStackNavigator()
 const AuthNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Login'
+      initialRouteName='RegisterWithEmail'
       // screenOptions: Cấu hình chung cho tất cả màn hình
       screenOptions={{
         headerShown: false,
@@ -25,8 +26,9 @@ const AuthNavigation = () => {
         fullScreenGestureEnabled: true // Cho phép người dùng vuốt từ cạnh màn hình để quay lại màn hình trước đó
       }}
     >
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='Register' component={Register} />
+      <Stack.Screen name='RegisterWithEmail' component={RegisterWithEmail} />
+      <Stack.Screen name='LoginWithEmail' component={LoginWithEmail} />
+      <Stack.Screen name='LoginWithPhone' component={LoginWithPhone} />
     </Stack.Navigator>
   )
 }

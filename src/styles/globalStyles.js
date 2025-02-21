@@ -65,5 +65,9 @@ export const globalStyles = StyleSheet.create({
     margin: 0,
     padding: 0,
     justifyContent: 'flex-start'
+  },
+
+  modalLoadng: {
+    backgroundColor: 'rgba(0,0,0,0.5)'
   }
 })

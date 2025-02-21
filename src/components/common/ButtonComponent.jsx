@@ -11,13 +11,14 @@ const ButtonComponent = (props) => {
     iconAfter = null,
     color = colors.white,
     bgColor = colors.lightBlue,
-    onPress
+    onPress,
+    disabled = false
   } = props
 
   const localStyles = [[globalStyles.button, { backgroundColor: bgColor }, styles]]
 
   return (
-    <TouchableOpacity onPress={onPress} style={localStyles}>
+    <TouchableOpacity onPress={onPress} style={localStyles} disabled={disabled}>
       {iconBefore && iconBefore}
 
       {text && <TextComponent text={text} color={color} />}
