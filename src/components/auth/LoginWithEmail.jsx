@@ -1,6 +1,7 @@
 import ButtonComponent from '@/components/common/ButtonComponent'
 import ContainerComponent from '@/components/common/ContainerComponent'
 import InputComponent from '@/components/common/InputComponent'
+import RowComponent from '@/components/common/RowComponent'
 import SectionComponent from '@/components/common/SectionComponent'
 import SpaceComponent from '@/components/common/SpaceComponent'
 import TextComponent from '@/components/common/TextComponent'
@@ -8,12 +9,14 @@ import { colors } from '@/constants/colors'
 import { fontFamilies } from '@/constants/fontFamilies'
 import { auth } from '@/firebase/config'
 import { globalStyles } from '@/styles/globalStyles'
-import { useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const LoginWithEmail = () => {
+  const navigation = useNavigation()
   const route = useRoute()
 
   const { email: emailParam, password: passwordParam } = route.params ?? {}
@@ -34,13 +37,21 @@ const LoginWithEmail = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        console.log('Login Success: ', user)
+        setEmail('')
+        setPassword('')
       })
       .catch((error) => {
         setError('Tài khoản không hợp lệ !')
         console.log('Login Failure: ', error)
       })
   }
+
+  // Reset error khi màn hình được focus
+  useFocusEffect(
+    useCallback(() => {
+      setError('')
+    }, [])
+  )
 
   return (
     <ContainerComponent isScroll={false}>
@@ -73,7 +84,27 @@ const LoginWithEmail = () => {
           helpText={error}
         />
 
-        <ButtonComponent text='Login' onPress={handleLogin} styles={{ width: '100%' }} />
+        <RowComponent>
+          <ButtonComponent text='Login' onPress={handleLogin} styles={{ width: '100%' }} />
+        </RowComponent>
+
+        <SpaceComponent height={15}></SpaceComponent>
+
+        <RowComponent>
+          <TextComponent text="Don't have an account?" />
+          <SpaceComponent width={5}></SpaceComponent>
+          <TouchableOpacity onPress={() => navigation.navigate('RegisterWithEmail')}>
+            <TextComponent text='Sign up' color={colors.lightBlue} />
+          </TouchableOpacity>
+        </RowComponent>
+
+        <SpaceComponent height={15}></SpaceComponent>
+
+        <RowComponent>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPasswordWithEmail')}>
+            <TextComponent text='Forgot password' color={colors.lightBlue} />
+          </TouchableOpacity>
+        </RowComponent>
       </SectionComponent>
     </ContainerComponent>
   )

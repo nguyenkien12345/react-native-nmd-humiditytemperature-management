@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { Animated, ImageBackground, SafeAreaView, StatusBar, StyleSheet, Text } from 'react-native'
 import background from '../../assets/images/QLNhietDoDoAmBackground.png'
 
@@ -8,16 +8,34 @@ function Welcome() {
 
   const topMotion = useRef(new Animated.Value(-100)).current
 
+  const isMounted = useRef(true)
+
+  const startAnimation = useCallback(() => {
+    Animated.timing(topMotion, {
+      toValue: 50,
+      duration: 1000,
+      useNativeDriver: true
+    }).start()
+  }, [topMotion])
+
   useEffect(() => {
-    let x = setTimeout(() => {
-      Animated.timing(topMotion, { toValue: 50, duration: 1000, useNativeDriver: false }).start()
+    isMounted.current = true
+  
+    const animationTimeout = setTimeout(() => {
+      startAnimation()
     }, 1000)
-    let y = setTimeout(() => {
-      navigation.navigate('InfoUser')
+
+    const navigationTimeout = setTimeout(() => {
+      if (isMounted.current) {
+        navigation.navigate('InfoUser')
+      }
     }, 3000)
+   
+
     return () => {
-      clearInterval(x)
-      clearInterval(y)
+      isMounted.current = false
+      clearTimeout(animationTimeout)
+      clearTimeout(navigationTimeout)
     }
   }, [])
 
@@ -26,7 +44,7 @@ function Welcome() {
       <StatusBar barStyle={'light-content'} />
 
       <SafeAreaView style={styles.safeArea}>
-        <Animated.View style={[styles.wrapper, { marginTop: topMotion }]}>
+        <Animated.View style={[styles.wrapper, { transform: [{ translateY: topMotion }] }]}>
           <Text style={styles.title}>Quản lý nhiệt độ, độ ẩm, bụi mịn, không khí</Text>
         </Animated.View>
       </SafeAreaView>

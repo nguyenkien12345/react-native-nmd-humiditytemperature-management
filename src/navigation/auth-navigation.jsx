@@ -1,5 +1,5 @@
+import ForgotPasswordWithEmail from '@/components/auth/ForgotPasswordWithEmail'
 import LoginWithEmail from '@/components/auth/LoginWithEmail'
-import LoginWithPhone from '@/components/auth/LoginWithPhone'
 import RegisterWithEmail from '@/components/auth/RegisterWithEmail'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -28,7 +28,7 @@ const AuthNavigation = () => {
     >
       <Stack.Screen name='RegisterWithEmail' component={RegisterWithEmail} />
       <Stack.Screen name='LoginWithEmail' component={LoginWithEmail} />
-      <Stack.Screen name='LoginWithPhone' component={LoginWithPhone} />
+      <Stack.Screen name='ForgotPasswordWithEmail' component={ForgotPasswordWithEmail} />
     </Stack.Navigator>
   )
 }

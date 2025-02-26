@@ -1,6 +1,7 @@
 import ButtonComponent from '@/components/common/ButtonComponent'
 import ContainerComponent from '@/components/common/ContainerComponent'
 import InputComponent from '@/components/common/InputComponent'
+import RowComponent from '@/components/common/RowComponent'
 import SectionComponent from '@/components/common/SectionComponent'
 import SpaceComponent from '@/components/common/SpaceComponent'
 import TextComponent from '@/components/common/TextComponent'
@@ -9,9 +10,10 @@ import { fontFamilies } from '@/constants/fontFamilies'
 import { auth } from '@/firebase/config'
 import { globalStyles } from '@/styles/globalStyles'
 import { checkLength, validateEmail } from '@/utils/validations'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createUserWithEmailAndPassword, validatePassword } from 'firebase/auth'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const RegisterWithEmail = () => {
@@ -67,6 +69,20 @@ const RegisterWithEmail = () => {
       })
   }
 
+  // Reset error khi màn hình được focus
+  useFocusEffect(
+    useCallback(() => {
+      setEmail('')
+      setPassword('')
+      setCfPassword('')
+      setErrors({
+        email: '',
+        password: '',
+        cfPassword: ''
+      })
+    }, [])
+  )
+
   return (
     <ContainerComponent isScroll={false}>
       <SectionComponent styles={[globalStyles.row, globalStyles.center, { paddingTop: '15%' }]}>
@@ -108,7 +124,19 @@ const RegisterWithEmail = () => {
           helpText={errors.cfPassword}
         />
 
-        <ButtonComponent text='Register' onPress={handleRegister} styles={{ width: '100%' }} />
+        <RowComponent>
+          <ButtonComponent text='Register' onPress={handleRegister} styles={{ width: '100%' }} />
+        </RowComponent>
+
+        <SpaceComponent height={15}></SpaceComponent>
+
+        <RowComponent>
+          <TextComponent text='Already have an account?' />
+          <SpaceComponent width={5}></SpaceComponent>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginWithEmail')}>
+            <TextComponent text='Sign in' color={colors.lightBlue} />
+          </TouchableOpacity>
+        </RowComponent>
       </SectionComponent>
     </ContainerComponent>
   )
