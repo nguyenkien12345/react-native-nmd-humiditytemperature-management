@@ -23,7 +23,6 @@ function Home() {
   const canBackToScreen = navigation.canGoBack();
 
   const route = useRoute();
-  const { name = "", author = "" } = route.params;
 
   const [slideActive, setSlideActive] = useState(0);
 

@@ -2,17 +2,17 @@ import { deleteData, getAll, getDetail } from '@/apis'
 import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useRef, useState } from 'react'
 import {
-    ActivityIndicator,
-    Alert,
-    Animated,
-    Image,
-    RefreshControl,
-    SafeAreaView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  ActivityIndicator,
+  Alert,
+  Animated,
+  Image,
+  RefreshControl,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import DownArrowIcon from '../../assets/images/down-arrow.png'
