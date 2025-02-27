@@ -25,7 +25,7 @@ const Router = () => {
   // return <NavigationContainer>{isAuthenticated ? <ProtectedNavigation /> : <AuthNavigation />}</NavigationContainer>
   return (
     <NavigationContainer>
-      <ProtectedNavigation />
+      <AuthNavigation />
     </NavigationContainer>
   )
 }

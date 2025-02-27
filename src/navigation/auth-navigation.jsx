@@ -1,6 +1,7 @@
 import ForgotPasswordWithEmail from '@/components/auth/ForgotPasswordWithEmail'
 import LoginWithEmail from '@/components/auth/LoginWithEmail'
 import RegisterWithEmail from '@/components/auth/RegisterWithEmail'
+import PushNotification from '@/components/push-notifications/PushNotification'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator()
@@ -8,7 +9,7 @@ const Stack = createNativeStackNavigator()
 const AuthNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName='RegisterWithEmail'
+      initialRouteName='PushNotification'
       // screenOptions: Cấu hình chung cho tất cả màn hình
       screenOptions={{
         headerShown: false,
@@ -29,6 +30,7 @@ const AuthNavigation = () => {
       <Stack.Screen name='RegisterWithEmail' component={RegisterWithEmail} />
       <Stack.Screen name='LoginWithEmail' component={LoginWithEmail} />
       <Stack.Screen name='ForgotPasswordWithEmail' component={ForgotPasswordWithEmail} />
+      <Stack.Screen name='PushNotification' component={PushNotification} />
     </Stack.Navigator>
   )
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "973394127587",
+    "project_id": "mobile-authentication-89726",
+    "storage_bucket": "mobile-authentication-89726.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973394127587:android:74f184d396aae0e41873d6",
+        "android_client_info": {
+          "package_name": "com.nguyentrungkienliverpool.ManagementApplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTtaaFbs6uarpggIxW1pXjuLL6qfubiFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

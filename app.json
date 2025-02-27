@@ -13,13 +13,20 @@
       "supportsTablet": true
     },
     "android": {
-      "softwareKeyboardLayoutMode": "pan"
+      "googleServicesFile": "./google-services.json",
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.nguyentrungkienliverpool.ManagementApplication"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2e54497f-c31b-4861-8558-934548a0d349"
+      }
+    }
   }
 }
